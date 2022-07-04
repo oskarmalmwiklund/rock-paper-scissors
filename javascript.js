@@ -37,14 +37,33 @@ function playRound(playerSelection, computerSelection){
         return `You win! ${playerSelection} beats ${computerSelection}.`
 }
 
+// Prompt user for selection and return
+function playerPrompt(){
+    let playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
+    let keepRunning = true;
+
+    // Check if input is valid, otherwise loop again
+    while(keepRunning){
+        alert("Incorrect input. You must choose rock, paper or scissors");
+        playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
+
+        if(playerSelection === altOne || playerSelection === altTwo || playerSelection === altThree){
+            keepRunning = false;
+        }
+
+    }
+
+    return playerSelection;
+}
+
 function game(){
     
     let playerScore = 0;
     let computerScore = 0;
     
     for(let i = 0; i < 5; i++){
-        // Prompt user for a selection and store in playerSelection
-        let playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
+        // Call playerPrompt function and store return value in playerSelection
+        let playerSelection = playerPrompt();
         // call computerPlay function and store result in computerSelection
         let computerSelection = computerPlay();
         // Store result of playRound in gameOutcome
