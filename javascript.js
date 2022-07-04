@@ -1,9 +1,3 @@
-// Prompt user for a selection and store in playerSelection
-const playerSelection = prompt("Rock, paper, scissors?","").toLocaleLowerCase();
-
-// call computerPlay function and store result in computerSelection
-const computerSelection = computerPlay();
-
 const altOne = "rock";
 const altTwo = "paper";
 const altThree = "scissors";
@@ -21,7 +15,7 @@ if (randomNumber === 1){
         // If randomNumber = 2, return altTwo
         return altTwo;
     } else {
-        // If randomNumber = 1, return altThree
+        // If randomNumber = 3, return altThree
         return altThree;
     }
 }
@@ -35,21 +29,45 @@ function playRound(playerSelection, computerSelection){
     } else if((playerSelection === altOne && computerSelection === altTwo)
             || (playerSelection === altThree && computerSelection === altOne)
             || (playerSelection === altTwo && computerSelection === altThree)) {
-        return `You Lose! ${computerSelection} beats ${playerSelection}.`
+        return `You lose! ${computerSelection} beats ${playerSelection}.`
         // All conditions that make the player win
     } else if((playerSelection === altOne && computerSelection === altThree)
             || (playerSelection === altTwo && computerSelection === altOne)
             || (playerSelection === altThree && computerSelection === altTwo))
-        return `You Win! ${playerSelection} beats ${computerSelection}.`
+        return `You win! ${playerSelection} beats ${computerSelection}.`
 }
 
-// Create a function game that calls the playRound function 5 times
 function game(){
-
+    
     let playerScore = 0;
     let computerScore = 0;
-
+    
     for(let i = 0; i < 5; i++){
-        playRound();
+        // Prompt user for a selection and store in playerSelection
+        let playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
+        // call computerPlay function and store result in computerSelection
+        let computerSelection = computerPlay();
+        // Store result of playRound in gameOutcome
+        let gameOutcome = playRound(playerSelection, computerSelection);
+        
+        // If gameOutcome contains win add +1 to player
+        if(gameOutcome.includes("win")){
+            playerScore += 1;
+        // If gameOutcome contains lose add +1 to computer
+        } else if(gameOutcome.includes("lose")){
+            computerScore += 1;
+        }
+
+        // Print the result for every round
+        console.log(gameOutcome);
+    }
+
+    // If playerScore > ComputerScore print win, else lost
+    if(playerScore > computerScore){
+        console.log("You won!");
+    } else {
+        console.log("You lost!");
     }
 }
+
+game()
