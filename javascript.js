@@ -1,10 +1,17 @@
+// Prompt user for a selection and store in playerSelection
+const playerSelection = prompt("Rock, paper, scissors?","").toLocaleLowerCase();
+
+// call computerPlay function and store result in computerSelection
+const computerSelection = computerPlay();
+
 const altOne = "rock";
 const altTwo = "paper";
 const altThree = "scissors";
 
 // Create a function called computerPlay
 function computerPlay(){
-// Randomly generate a number between 1-3 and store in variable randomNumber
+
+    // Randomly generate a number between 1-3 and store in variable randomNumber
 let randomNumber = Math.floor(Math.random()*3+1);
 
 if (randomNumber === 1){
@@ -36,7 +43,7 @@ function playRound(playerSelection, computerSelection){
         return `You Win! ${playerSelection} beats ${computerSelection}.`
 }
 
-// Create a function that calls the playRound function 5 times
+// Create a function game that calls the playRound function 5 times
 function game(){
 
     let playerScore = 0;
@@ -46,9 +53,3 @@ function game(){
         playRound();
     }
 }
-
-// Prompt user for a selection and store in playerSelection
-const playerSelection = prompt("Rock, paper, scissors?","").toLocaleLowerCase();
-
-// call computerPlay function and store result in computerSelection
-const computerSelection = computerPlay();
