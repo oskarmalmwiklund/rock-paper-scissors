@@ -1,6 +1,7 @@
 const altOne = "rock";
 const altTwo = "paper";
 const altThree = "scissors";
+const altFour = "nuke";
 
 // Create a function called computerPlay
 function computerPlay(){
@@ -29,12 +30,15 @@ function playRound(playerSelection, computerSelection){
     } else if((playerSelection === altOne && computerSelection === altTwo)
             || (playerSelection === altThree && computerSelection === altOne)
             || (playerSelection === altTwo && computerSelection === altThree)) {
-        return `You lose! ${computerSelection} beats ${playerSelection}.`
+        return `You lose! ${computerSelection} beats ${playerSelection}.`;
         // All conditions that make the player win
     } else if((playerSelection === altOne && computerSelection === altThree)
             || (playerSelection === altTwo && computerSelection === altOne)
-            || (playerSelection === altThree && computerSelection === altTwo))
-        return `You win! ${playerSelection} beats ${computerSelection}.`
+            || (playerSelection === altThree && computerSelection === altTwo)) {
+        return `You win! ${playerSelection} beats ${computerSelection}.`;
+    } else if(playerSelection === altFour) {
+        return `You win! ${playerSelection} beats everything!`;
+    }
 }
 
 // Prompt user for selection and return
@@ -42,12 +46,16 @@ function playerPrompt(){
     let playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
     let keepRunning = true;
 
+    if(playerSelection === altOne || playerSelection === altTwo || playerSelection === altThree || playerSelection === altFour){
+        return playerSelection;
+    }
+
     // Check if input is valid, otherwise loop again
     while(keepRunning){
         alert("Incorrect input. You must choose rock, paper or scissors");
         playerSelection = prompt(`${altOne}, ${altTwo}, ${altThree}?`,"").toLocaleLowerCase();
 
-        if(playerSelection === altOne || playerSelection === altTwo || playerSelection === altThree){
+        if(playerSelection === altOne || playerSelection === altTwo || playerSelection === altThree || playerSelection === altFour){
             keepRunning = false;
         }
 
@@ -64,6 +72,12 @@ function game(){
     for(let i = 0; i < 5; i++){
         // Call playerPrompt function and store return value in playerSelection
         let playerSelection = playerPrompt();
+
+        // If secret nuke code activated, game over
+        if(playerSelection === altFour){
+            playerScore = 9000;
+            i = 5;
+        }
         // call computerPlay function and store result in computerSelection
         let computerSelection = computerPlay();
         // Store result of playRound in gameOutcome
@@ -83,9 +97,9 @@ function game(){
 
     // If playerScore > ComputerScore print win, else lost
     if(playerScore > computerScore){
-        console.log("You won!");
+        console.log(`You won! You won ${playerScore} / 5 games!`);
     } else {
-        console.log("You lost!");
+        console.log(`You lost! You won ${playerScore} / 5 games`);
     }
 }
 
