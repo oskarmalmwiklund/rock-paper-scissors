@@ -20,6 +20,6 @@ function playRound(playerSelection, computerSelection){
     return computerSelection + " " + playerSelection;
 }
 
-const playerSelection = "rock";
+const playerSelection = prompt("Rock, paper, scissor?","").toLocaleLowerCase();
 const computerSelection = computerPlay();
 console.log(playRound(playerSelection, computerSelection));
