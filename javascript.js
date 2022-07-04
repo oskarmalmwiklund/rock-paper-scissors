@@ -38,6 +38,10 @@ function playRound(playerSelection, computerSelection){
 
 // Create a function that calls the playRound function 5 times
 function game(){
+
+    let playerScore = 0;
+    let computerScore = 0;
+
     for(let i = 0; i < 5; i++){
         playRound();
     }
@@ -48,4 +52,3 @@ const playerSelection = prompt("Rock, paper, scissors?","").toLocaleLowerCase();
 
 // call computerPlay function and store result in computerSelection
 const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
